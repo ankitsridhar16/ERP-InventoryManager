@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block body %}
+<section style="padding: 2.5%;">
+    <h2 class="center">Locations</h2>
+    <div class="container ">
+        <div class="col s12 m7 z-depth-5">
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-content">
+                    <table class="highlight centered">
+                        <thead>
+                            <tr>
+                                <th>Location Id</th>
+                                <th>Location Name</th>
+                                <th>Location Address</th>
+                                <th>Action for location</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                        {% for location in locations%}
+                            <tr>
+                                <td>{{location.locationId}}</td>
+                                <td>{{location.locationName}}</td>
+                                <td>{{location.locationAddress}}</td>
+                                <td><a href="/updatelocation/{{location.locationId}}">Update</a> |
+                                    <a href="/deletelocation/{{location.locationId}}">Delete</a></td>
+                                
+                            </tr>
+                
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</section>
+
+    <div class="container">
+        <div class="row right">
+            <div class="col">
+                <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#addlocation"><i class="material-icons">add</i></a>
+            </div>
+        </div>
+        <div id="addlocation" class="modal">
+            <div class="modal-footer container">
+                <a href="#!" class="btn-floating waves-effect waves-light red modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+            </div>
+            <div class="modal-content">
+                <h4>Add Location</h4>
+                <div class="row">
+                    <form class="col s12" action="{{url_for('addlocation')}}" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="location_name" type="text" class="validate">
+                                <label for="location_name">Location Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="location_address" type="text" class="validate">
+                                <label for="location_address">Location Address</label>
+                            </div>
+                        </div>
+                        <div class="row right">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Add Location
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+
+</div>
+{% endblock %}

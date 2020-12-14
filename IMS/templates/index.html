@@ -1,0 +1,69 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container" style="padding: 2.5%;">
+        <div class="col s6 m6 l6 z-depth-5">
+            <div class="card">
+              <div class="card-stacked">
+                <div class="card-content">
+                    <div class="row">
+                        <h5 class="center">Product Overview</h5>
+                        <div class="col s12">
+                            <table class="highlight centered">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Product Quantity</th>
+                                    </tr>
+                                </thead>
+                            
+                                <tbody>
+                                    {% for product in products %}
+                                    <tr>
+                                        <td>{{product.productName}}</td>
+                                        <td>{{product.productQuantity}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+               </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s6 m6 l6 z-depth-5">
+            <div class="card">
+              <div class="card-stacked">
+                <div class="card-content">
+                    <div class="row">
+                        <h5 class="center">Location Overview</h5>
+                        <div class="col s12">
+                            <table class="highlight centered">
+                                <thead>
+                                    <tr>
+                                        <th>Location Name</th>
+                                        <th>Location Address</th>
+                                    </tr>
+                                </thead>
+                            
+                                <tbody>
+                                    {% for location in locations %}
+                                    <tr>
+                                        <td>{{location.locationName}}</td>
+                                        <td>{{location.locationAddress}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+               </div>
+              </div>
+            </div>
+          </div>
+        
+    </div>
+{% endblock %}

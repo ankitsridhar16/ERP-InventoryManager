@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block body %}
+    <section style="padding: 2.5%;">
+        <h2 class="center">Products</h2>
+        <div class="container">
+            <div class="col s12 m7 z-depth-5">
+                <div class="card horizontal">
+                  <div class="card-stacked">
+                    <div class="card-content">
+                        <table class="highlight centered">
+                            <thead>
+                                <tr>
+                                    <th>Product Id</th>
+                                    <th>Product Name</th>
+                                    <th>Product Price</th>
+                                    <th>Product Quantity</th>
+                                    <th>Action for Product</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                            {% for product in products %}
+                                <tr>
+                                    <td>{{product.productId}}</td>
+                                    <td>{{product.productName}}</td>
+                                    <td>Rs {{product.productPrice}}</td>
+                                    <td>{{product.productQuantity}} units</td>
+                                    <td><a  href="/updateproduct/{{product.productId}}">Update</a> |
+                                        <a  href="/deleteproduct/{{product.productId}}">Delete</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row right">
+            <div class="col">
+                <a class="btn-floating btn-large waves-effect waves-light green z-depth-5 modal-trigger" href="#addproduct"><i class="material-icons">add</i></a>
+            </div>
+        </div>
+        
+        <!-- Modal Structure -->
+        <div id="addproduct" class="modal">
+            <div class="modal-footer">
+                <a href="#!" class="btn-floating red waves-effect waves-light modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+            </div>
+            <div class="modal-content">
+                <h4>Add product</h4>
+                <div class="row">
+                    <form class="col s12" action="{{url_for('addproduct')}}" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="product_name" type="text" class="validate">
+                                <label for="product_name">Product Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input name="product_price" type="text" class="validate">
+                                <label for="product_price">Product Price</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input name="product_quantity" type="text" class="validate">
+                                <label for="product_quantity">Product Quantity</label>
+                            </div>
+                        </div>
+                        <div class="row right">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Add Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

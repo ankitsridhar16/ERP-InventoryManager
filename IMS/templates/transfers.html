@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block body %}
+    <section style="padding: 2.5%;">
+        <h2 class="center">Transfers</h2>
+        <div class="container">
+            <div class="col s12 m7 z-depth-5">
+                <div class="card horizontal">
+                  <div class="card-stacked">
+                    <div class="card-content">
+                        <table class="highlight centered">
+                            <thead>
+                                <tr>
+                                    <th>Movement Id</th>
+                                    <th>Product Name</th>
+                                    <th>Product Quantity</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Entry Time</th>
+                                    <th>Action for Transfer</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                                {% for movement in movements %}
+                                    <tr>
+                                        <td>{{movement.movementId}}</td>
+                                        <td>{{movement.prodName}}</td>
+                                        <td>{{movement.prodQuantity}}</td>
+                                        <td>{{movement.fromLocation}}</td>
+                                        <td>{{movement.toLocation}}</td>
+                                        <td>{{movement.timestamp}}</td>
+                                        <td><a  href="/updatetransfer/{{movement.movementId}}">Update</a> |
+                                            <a  href="/deletetransfer/{{movement.movementId}}">Delete</a></td>
+                                    </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row right">
+            <div class="col">
+                <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#maketransfer"><i class="material-icons">add</i></a>
+            </div>
+        </div>
+        
+        <!-- Modal Structure -->
+        <div id="maketransfer" class="modal">
+            <div class="modal-footer">
+                <a href="#!" class="btn-floating red waves-effect waves-light modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+            </div>
+            <div class="modal-content">
+                <h4>Make Transfer</h4>
+                <div class="row">
+                    <form class="col s12" action="{{url_for('maketransfer')}}" method="POST">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                {% if products|length < 1 %}
+                                    <h5>Please add some locations</h5>
+                                {% else %}
+                                <select name="product_name">
+                                {% for product in products %}
+                                    <option value="{{product.productName}}">{{product.productName}}</option>
+                                {% endfor %}
+                                </select>
+                                <label>Product Name</label>
+                                {% endif %}
+                            </div>
+                            <div class="input-field col s6">
+                                <input name="product_quantity" type="text" class="validate">
+                                <label for="product_quantity">Product Quantity</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                {% if locations|length < 1 %}
+                                    <h5>Please add some locations</h5>
+                                {% else %}
+                                <select name="from_location">
+                                {% for location in locations %}
+                                    <option value="{{location.locationName}}">{{location.locationName}}</option>
+                                {% endfor %}
+                                </select>
+                                <label>From</label>
+                                {% endif %}
+                            </div>
+                            <div class="input-field col s6">
+                                {% if locations|length < 1 %}
+                                    <h5>Please add some locations</h5>
+                                {% else %}
+                                <select name="to_location">
+                                {% for location in locations %}
+                                    <option value="{{location.locationName}}">{{location.locationName}}</option>
+                                {% endfor %}
+                                </select>
+                                <label>To</label>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row right">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Make Transfer
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+        
+  
+{% endblock %}

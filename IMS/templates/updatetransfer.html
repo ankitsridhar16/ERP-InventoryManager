@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <div class="col s12 m7">
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-content">
+                    <h4>Make Transfer</h4>
+                    <div class="row">
+                        <form class="col s12" action="/updatetransfer/{{movement.movementId}}" method="POST">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input name="product_name" type="text" class="validate" value="{{movement.prodName}}">
+                                    <label for="product_name">Product Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input name="product_quantity" type="text" class="validate" value="{{movement.prodQuantity}}"> 
+                                    <label for="product_quantity">Product Quantity</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <select name="to_location">
+                                    {% for location in locations %}
+                                        <option value="{{location.locationName}}">{{location.locationName}}</option>
+                                    {% endfor %}
+                                    </select>
+                                    <label>To</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <select name="from_location">
+                                    {% for location in locations %}
+                                        <option value="{{location.locationName}}">{{location.locationName}}</option>
+                                    {% endfor %}
+                                    </select>
+                                    <label>From</label>
+                                </div>
+                            </div>
+                            <div class="row right">
+                                <button class="btn waves-effect waves-light green" type="submit">Update<i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+{% endblock %}

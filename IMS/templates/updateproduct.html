@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Inventory system | Update Products</title>
+{% endblock %}
+{% block body %}
+<div class="container" style="padding: 5%;">
+    <div class="col s12 m7 z-depth-5">
+        <div class="card horizontal">
+          <div class="card-stacked">
+            <div class="card-content">
+                <h4 class="center">Update product</h4>
+                <div class="row">
+                    <form class="col s12" action="/updateproduct/{{product.productId}}" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="product_name" type="text" class="validate" value="{{product.productName}}">
+                                <label for="product_name">Product Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input name="product_price" type="text" class="validate" value="{{product.productPrice}}">
+                                <label for="product_price">Product Price</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input name="product_quantity" type="text" class="validate" value="{{product.productQuantity}}">
+                                <label for="product_quantity">Product Quantity</label>
+                            </div>
+                        </div>
+                        <div class="row right">
+                            <button class="btn waves-effect waves-light green" type="submit">Update<i class="material-icons right">send</i> 
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+</div>
+
+</div>
+
+{% endblock %}

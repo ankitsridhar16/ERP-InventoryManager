@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Inventory system | Update Location</title>
+{% endblock %}
+{% block body %}
+
+<div class="container" style="padding: 5%;">
+    <div class="col s12 m7 z-depth-5">
+        <div class="card horizontal">
+          <div class="card-stacked">
+            <div class="card-content">
+                <h4 class="center">Update location</h4>
+                <div class="row">
+                    <form class="col s12" action="/updatelocation/{{location.locationId}}" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="location_name" type="text" class="validate" value={{location.locationName}}>
+                                <label for="location_name">Location Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="location_address" type="text" class="validate" value={{location.locationAddress}}>
+                                <label for="location_address">Location Address</label>
+                            </div>
+                        </div>
+                        <div class="row right">
+                            <button class="btn waves-effect waves-light green" type="submit" name="action">Update<i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
