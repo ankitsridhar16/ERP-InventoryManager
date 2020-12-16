@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
+<section>
+    <div class="container">
+    {% with messages = get_flashed_messages() %}
+        {%if messages %}
+             {%for message in messages %}
+                  <p>{{ message }}</p>
+             {%endfor%}
+       {%endif %}
+     {%endwith%}
+    </div>
+</section>
 <section style="padding: 2.5%;">
     <h2 class="center">Locations</h2>
     <div class="container ">
@@ -18,7 +29,7 @@
                         </thead>
                 
                         <tbody>
-                        {% for location in locations%}
+                        {% for location in locations |sort(attribute="locationName")%}
                             <tr>
                                 <td>{{location.locationId}}</td>
                                 <td>{{location.locationName}}</td>
@@ -54,14 +65,12 @@
                     <form class="col s12" action="{{url_for('addlocation')}}" method="POST">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="location_name" type="text" class="validate">
-                                <label for="location_name">Location Name</label>
+                                <input name="location_name" type="text" placeholder="Location Name" class="validate">
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="location_address" type="text" class="validate">
-                                <label for="location_address">Location Address</label>
+                                <input name="location_address" type="text" placeholder="Location Address" class="validate">
                             </div>
                         </div>
                         <div class="row right">

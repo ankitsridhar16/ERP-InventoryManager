@@ -24,6 +24,13 @@ python3 server.py
 
 ### Transfers or Movements:
 * Add movement with product name, quantity, to and from location
-* Update a movement/transfer
-* Delete a movement/transfer
 
+
+## Updates
+
+* A new model 'balance' establishes a relationship between products,locations and transfers
+* Source of transfers/movement are warehouse
+* Fixed modal inconsistency
+* Validation messages doesnot redirect to new page instead show a flash message on success or       faillure
+* Overview , Products and Locations are sorted on basis of product name & location name
+* Required modules can be installed from requirements.txt file

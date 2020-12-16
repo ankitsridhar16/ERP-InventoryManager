@@ -34,3 +34,12 @@ class ProductMovement(db.Model):
     def __repr__(self):
         return f"Movement('{self.movementId}','{self.timestamp}','{self.fromLocation}','{self.toLocation}','{self.prodName}','{self.prodQuantity}')"
 
+# Balance Database table to maintain realtionship between location & products
+class Balance(db.Model):
+    balanceId = db.Column(db.Integer, primary_key= True,nullable = False)
+    product = db.Column(db.String(20), nullable = False)
+    location = db.Column(db.String(20),nullable = False)
+    quantity = db.Column(db.Integer, nullable = False)
+
+    def __repr__(self):
+        return f"Balance('{self.balanceId}','{self.product}','{self.location}','{self.quantity}')"

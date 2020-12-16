@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
+    <section>
+        <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                 {%for message in messages %}
+                      <p>{{ message }}</p>
+                 {%endfor%}
+           {%endif %}
+         {%endwith%}
+        </div>
+    </section>
     <section style="padding: 2.5%;">
         <h2 class="center">Products</h2>
         <div class="container">
@@ -19,7 +30,7 @@
                             </thead>
                         
                             <tbody>
-                            {% for product in products %}
+                            {% for product in products |sort(attribute="productName") %}
                                 <tr>
                                     <td>{{product.productId}}</td>
                                     <td>{{product.productName}}</td>
@@ -55,18 +66,15 @@
                     <form class="col s12" action="{{url_for('addproduct')}}" method="POST">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input name="product_name" type="text" class="validate">
-                                <label for="product_name">Product Name</label>
+                                <input name="product_name" type="text" placeholder="Product Name" class="validate">
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input name="product_price" type="text" class="validate">
-                                <label for="product_price">Product Price</label>
+                                <input name="product_price" type="text" placeholder="Product Price" class="validate">
                             </div>
                             <div class="input-field col s6">
-                                <input name="product_quantity" type="text" class="validate">
-                                <label for="product_quantity">Product Quantity</label>
+                                <input name="product_quantity" type="text" placeholder="Product Quantity" class="validate">
                             </div>
                         </div>
                         <div class="row right">

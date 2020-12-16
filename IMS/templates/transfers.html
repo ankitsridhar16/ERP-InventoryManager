@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
+    <section>
+        <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {%for message in messages %}
+                    <p>{{ message }}</p>
+                {%endfor%}
+        {%endif %}
+        {%endwith%}
+        </div>
+    </section>
     <section style="padding: 2.5%;">
         <h2 class="center">Transfers</h2>
         <div class="container">
@@ -15,8 +26,7 @@
                                     <th>Product Quantity</th>
                                     <th>From</th>
                                     <th>To</th>
-                                    <th>Entry Time</th>
-                                    <th>Action for Transfer</th>
+                                    <th>Transfer Time</th>
                                 </tr>
                             </thead>
                         
@@ -29,8 +39,6 @@
                                         <td>{{movement.fromLocation}}</td>
                                         <td>{{movement.toLocation}}</td>
                                         <td>{{movement.timestamp}}</td>
-                                        <td><a  href="/updatetransfer/{{movement.movementId}}">Update</a> |
-                                            <a  href="/deletetransfer/{{movement.movementId}}">Delete</a></td>
                                     </tr>
                                {% endfor %}
                             </tbody>
@@ -59,46 +67,33 @@
                     <form class="col s12" action="{{url_for('maketransfer')}}" method="POST">
                         <div class="row">
                             <div class="input-field col s6">
-                                {% if products|length < 1 %}
-                                    <h5>Please add some locations</h5>
-                                {% else %}
                                 <select name="product_name">
                                 {% for product in products %}
                                     <option value="{{product.productName}}">{{product.productName}}</option>
                                 {% endfor %}
                                 </select>
                                 <label>Product Name</label>
-                                {% endif %}
                             </div>
                             <div class="input-field col s6">
-                                <input name="product_quantity" type="text" class="validate">
-                                <label for="product_quantity">Product Quantity</label>
+                                <input name="product_quantity" type="text" placeholder="Product Quantity" class="validate">
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                {% if locations|length < 1 %}
-                                    <h5>Please add some locations</h5>
-                                {% else %}
                                 <select name="from_location">
                                 {% for location in locations %}
                                     <option value="{{location.locationName}}">{{location.locationName}}</option>
                                 {% endfor %}
                                 </select>
                                 <label>From</label>
-                                {% endif %}
                             </div>
                             <div class="input-field col s6">
-                                {% if locations|length < 1 %}
-                                    <h5>Please add some locations</h5>
-                                {% else %}
                                 <select name="to_location">
                                 {% for location in locations %}
                                     <option value="{{location.locationName}}">{{location.locationName}}</option>
                                 {% endfor %}
                                 </select>
                                 <label>To</label>
-                                {% endif %}
                             </div>
                         </div>
                         <div class="row right">
