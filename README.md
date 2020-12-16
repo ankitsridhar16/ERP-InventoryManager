@@ -6,6 +6,11 @@ IMS - Inventory Management System is a flask based full stack application to man
 
 Video Demo [link](https://www.youtube.com/watch?v=c0IiuBPqW6o&feature=youtu.be) 
 
+Installing modules
+```bash
+pip install -r requirements.txt
+```
+Starting the server
 ```bash
 python3 server.py
 ```
